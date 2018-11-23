@@ -1,0 +1,25 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///shop
+    username: root
+    password: 123
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+  data:
+    solr:
+      host: http://192.168.81.188:8080/solr
+mybatis:
+  mapper-locations: classpath*:com/qf/shop/dao/mapper/*.xml
+  type-aliases-package: com.qf.entity
+
+dubbo:
+  application:
+    name: service_provider
+  registry:
+    address: zookeeper://192.168.81.188:2181
+  protocol:
+    name: dubbo
+    port: 20880

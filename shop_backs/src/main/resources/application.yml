@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML5
+  servlet:
+    multipart:
+      file-size-threshold: 10MB
+dubbo:
+  application:
+    name: shop_back
+  registry:
+    address: zookeeper://192.168.81.188:2181
+fdfs:
+  so-timeout: 60
+  pool:
+    jmx-enabled: false
+  thumb-image:
+    width: 200
+    height: 200
+  tracker-list: 192.168.81.188:22122
+
+image:
+  path: http://192.168.81.188/
