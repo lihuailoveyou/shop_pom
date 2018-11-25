@@ -88,6 +88,8 @@ public class GoodsController {
         //实现：后台工程将得到的goods对象转成json字符串传给搜索工程，
         // 搜索工程将json字符串转成goods对象同步到索引库---HttpClient(让你的代码模拟一个浏览器的行为)
         HttpClientUtil.sendJson("http://localhost:8082/search/add",new Gson().toJson(goods));
+        //添加商品时同步索引库还要生成静态页面，静态请求也当成商品的对象以json的形式传到shop_item
+        HttpClientUtil.sendJson("http://localhost:8083/item/createhtml",new Gson().toJson(goods));
         return "redirect:/goods/list";
     }
 

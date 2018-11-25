@@ -43,13 +43,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-solr</artifactId>
-            <version></version>
-        </dependency>
-        <dependency>
-            <groupId>com.qf</groupId>
-            <artifactId>shop_entity</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.qf</groupId>
@@ -75,6 +68,11 @@
             <artifactId>zkclient</artifactId>
             <version>0.1</version>
         </dependency>
+<!--        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <scope>test</scope>
+        </dependency>-->
     </dependencies>
 
     <build>

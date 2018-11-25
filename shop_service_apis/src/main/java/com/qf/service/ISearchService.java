@@ -1,6 +1,7 @@
 package com.qf.service;
 
 import com.qf.entity.Goods;
+import com.qf.entity.PageSolr;
 
 import java.util.List;
 
@@ -25,5 +26,13 @@ public interface ISearchService {
      * @return
      */
     List<Goods> queryIndex(String keyword);
+
+    /**
+     * 根据索引来搜索会有个分页的效果
+     * @param keyword
+     * @param pageSolr
+     * @return
+     */
+    PageSolr<Goods> queryIndexPage(String keyword, PageSolr<Goods> pageSolr);
 }
 

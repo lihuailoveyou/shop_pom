@@ -702,10 +702,11 @@
         <!-- 商品列表 -->
         <div class="shop_bd_list_content clearfix">
             <ul>
-                <li th:each="good : ${goods}">
+                <li th:each="good : ${pageSolr.datas}">
                     <dl>
                         <!--记得加一个查看图片路径的前缀-->
-                        <dt><a ><img th:src="${path+good.gimage}" style="width: 150px;height: 150px" src="images/21151da3bdefc6d9a7120c991fe59800.jpg_small.jpg" /></a></dt>
+                        <!--通过${'http://localhost:8083/html/'+good.id+'.html'}"请求访问详情工程的静态页面(是商品id的静态页面),点击a标签的图片进入详情页-->
+                        <dt><a th:href="${'http://localhost:8083/html/'+good.id+'.html'}"><img th:src="${path+good.gimage}" style="width: 150px;height: 150px" src="images/21151da3bdefc6d9a7120c991fe59800.jpg_small.jpg" /></a></dt>
                         <!--把text改成"utext"就可以去掉高亮显示的前缀和后缀-->
                         <dd class="title"><a th:utext="${good.title}">OCIAIZO春装水洗做旧短外套复古磨白短款牛仔外套春01C1417</a></dd>
                         <dd class="content">
@@ -718,13 +719,15 @@
             </ul>
         </div>
         <div class="clear"></div>
-        <div class="pagination">
-            <ul><li><span>首页</span></li>
-                <li><span>上一页</span></li>
-                <li><span class="currentpage">1</span></li>
-                <li><span>下一页</span></li>
-                <li><span>末页</span></li>
-            </ul>
+
+
+        <!--
+             th:replace - 丢弃当前容器，保留片段中的容器
+             th:include - 保留当前的容器，丢弃片段的容器
+             th:insert - 将片段中的内容全部拿过来，放到当前容器的内部
+         -->
+        <div class="pagination" th:inline="text" th:insert="page :: mypage">
+
         </div>
         <!-- 商品列表 End -->
 

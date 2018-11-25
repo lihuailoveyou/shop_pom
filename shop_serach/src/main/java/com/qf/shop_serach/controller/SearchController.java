@@ -2,6 +2,7 @@ package com.qf.shop_serach.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.qf.entity.Goods;
+import com.qf.entity.PageSolr;
 import com.qf.service.ISearchService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -9,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * @Author Kinglee
@@ -29,18 +28,25 @@ public class SearchController {
     private String path;
 
     /**
-     * 根据关键字搜索商品
+     * 根据关键字搜索商品(分页)
      * @param keyword
      * @return
      */
     @RequestMapping("/list")
-    public String search(String keyword, Model model){
+    public String search(String keyword, Model model, PageSolr<Goods> pageSolr){
 
-        System.out.println("搜索的关键字:"+keyword);
-        List<Goods> goods = searchService.queryIndex(keyword);
-        model.addAttribute("goods",goods);
+        //System.out.println("搜索的关键字:"+keyword);
+        //List<Goods> goods = searchService.queryIndex(keyword);
+
+        //分页搜索
+        pageSolr= searchService.queryIndexPage(keyword,pageSolr);
+        model.addAttribute("pageSolr",pageSolr);
+        //model.addAttribute("goods",goods);
         //将查看商品图片的路径前缀传到前端页面
         model.addAttribute("path",path);
+
+        //分页的时候关键字不能变，得传过去页面去
+        model.addAttribute("keyword",keyword);
         return "searchlist";
     }
 
